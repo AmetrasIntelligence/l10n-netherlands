@@ -23,7 +23,7 @@ class AccountMove(models.Model):
 
     @api.model
     def _get_l10n_nl_vat_statement_protected_fields(self):
-        """ Hook for extensions """
+        """Hook for extensions"""
         return [
             "date",
             "invoice_date",
@@ -37,7 +37,7 @@ class AccountMove(models.Model):
 
     @api.model
     def _l10n_nl_vat_statement_should_check_write(self, values):
-        """ Hook for extensions """
+        """Hook for extensions"""
         all_fields = set(values.keys())
         protected_fields = set(self._get_l10n_nl_vat_statement_protected_fields())
         return bool(protected_fields & all_fields)
