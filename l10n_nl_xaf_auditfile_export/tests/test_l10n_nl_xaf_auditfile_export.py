@@ -14,7 +14,7 @@ from odoo.tools import mute_logger
 
 
 def get_transaction_line_count_from_xml(auditfile):
-    """ Helper XML method to parse and return the transaction line count """
+    """Helper XML method to parse and return the transaction line count"""
     line_count = 0
     with ZipFile(BytesIO(base64.b64decode(auditfile)), "r") as z:
         contents = z.read(z.filelist[-1]).decode()
@@ -55,7 +55,7 @@ class TestXafAuditfileExport(TransactionCase):
         self.invoice.post()
 
     def test_01_default_values(self):
-        """ Check that the default values are filled on creation """
+        """Check that the default values are filled on creation"""
         record = self.env["xaf.auditfile.export"].create({})
 
         self.assertTrue(record)
@@ -70,7 +70,7 @@ class TestXafAuditfileExport(TransactionCase):
         self.assertFalse(record.unit4)
 
     def test_02_export_success(self):
-        """ Do a basic auditfile export """
+        """Do a basic auditfile export"""
         record = self.env["xaf.auditfile.export"].create({})
         record.button_generate()
 
@@ -92,7 +92,7 @@ class TestXafAuditfileExport(TransactionCase):
 
     @mute_logger("odoo.addons.l10n_nl_xaf_auditfile_export.models.xaf_auditfile_export")
     def test_03_export_error(self):
-        """ Failure to export an auditfile """
+        """Failure to export an auditfile"""
         record = self.env["xaf.auditfile.export"].create({})
         record.company_id.country_id = False
         record.button_generate()
@@ -109,7 +109,7 @@ class TestXafAuditfileExport(TransactionCase):
         self.assertFalse(record.unit4)
 
     def test_04_export_success_unit4(self):
-        """ Do a basic auditfile export (no Unit4) """
+        """Do a basic auditfile export (no Unit4)"""
         record = self.env["xaf.auditfile.export"].create({})
         record.unit4 = True
         record.button_generate()
@@ -132,14 +132,14 @@ class TestXafAuditfileExport(TransactionCase):
             self.assertTrue(contents.startswith("<?xml "))
 
     def test_05_export_success(self):
-        """ Export auditfile with / character in filename """
+        """Export auditfile with / character in filename"""
         record = self.env["xaf.auditfile.export"].create({})
         record.name += "%s01" % os.sep
         record.button_generate()
         self.assertTrue(record)
 
     def test_06_include_moves_from_inactive_journals(self):
-        """ Include moves off of inactive journals """
+        """Include moves off of inactive journals"""
         record = self.env["xaf.auditfile.export"].create({})
         record.button_generate()
         self.assertTrue(record)
