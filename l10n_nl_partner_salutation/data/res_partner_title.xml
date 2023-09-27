@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
     <record id="base.res_partner_title_prof" model="res.partner.title">
         <field name="name">Prof.</field>
